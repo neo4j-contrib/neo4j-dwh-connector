@@ -1,0 +1,38 @@
+{
+  "name": "Create Persons from CSV to Neo4j",
+  "master": "local",
+  "_comment": "The `source` field is a general field that manages the source database. Is basically where we read the data",
+  "source": {
+    "_comment": "The `format` field manages the connector datasource",
+    "format": "csv",
+    "_comment": "The `options` field manages the connector datasource options, which are specific for each datasource",
+    "options": {
+      "path": ""
+    },
+    "_comment": "The `columns` field manages projection of the dataframe, `name` is the column name, `alias` is the name that you want to give (not mandatory)",
+    "columns": [
+      {
+        "name": "person_id",
+        "alias": "id"
+      },
+      {
+        "name": "person_name",
+        "alias": "name"
+      }
+    ],
+    "_comment": "The `where` field manages filters on the datasource (not mandatory)",
+    "where": "person_surname = 'Santurbano'"
+  },
+  "_comment": "The `target` field is a general field that manages the target database. Is basically where we write the data that has been read in the field `source`",
+  "target": {
+    "_comment": "The `format` field manages the connector datasource",
+    "format": "org.neo4j.spark.DataSource",
+    "_comment": "The `mode` is the save mode of the writing connector",
+    "mode": "Overwrite",
+    "_comment": "The `options` field manages the connector datasource options, which are specific for each datasource",
+    "options": {
+      "labels": ":Person:Customer",
+      "node.keys": "id"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "name" : "\n<This is a generated Configuration, please fill all the field accordingly>\nIn order to work the following dependencies are required:\n - `net.snowflake:spark-snowflake_<scala_version>:<version>`\n - `net.snowflake:snowflake-jdbc:<version>`\n - `org.neo4j:neo4j-connector-apache-spark_<scala_version>:<version>`\n",
+  "master" : "",
+  "conf" : { },
+  "hadoopConfiguration" : { },
+  "source" : {
+    "format" : "snowflake",
+    "options" : {
+      "_comment" : "<This field is a comment you can simple ignore it>\nYou can find the full list of Snowflake configuration properties here:\nhttps://docs.snowflake.com/en/user-guide/spark-connector-use.html#setting-configuration-options-for-the-connector\n",
+      "sfSchema" : "<schema>",
+      "sfPassword" : "<password>",
+      "sfUser" : "<user_name>",
+      "sfWarehouse" : "<warehouse>",
+      "dbtable" : "<snowflake-table>",
+      "sfDatabase" : "<database>",
+      "sfURL" : "<account_identifier>.snowflakecomputing.com"
+    },
+    "columns" : [ {
+      "name" : "<Dataframe column name to project>.\nN.b. `columns` field will be ignored in case\nyou're using it in the `target` field\n",
+      "alias" : "Alias to column, not mandatory"
+    } ],
+    "where" : "<Spark SQL filter to the Dataframe.> It will be ignored in case you're using it in the `target` field.",
+    "printSchema" : false,
+    "limit" : -1,
+    "show" : -1,
+    "partition" : {
+      "number" : -1,
+      "by" : ""
+    }
+  },
+  "target" : {
+    "format" : "org.neo4j.spark.Datasource",
+    "options" : {
+      "_comment" : "<This field is a comment you can simple ignore it>\nYou can find the full list of Neo4j configuration properties here:\nhttps://neo4j.com/docs/spark/current/\n",
+      "url" : "<neo4j_url>",
+      "authentication.type" : "<auth type> Please see: https://neo4j.com/docs/spark/current/configuration/",
+      "authentication.basic.username" : "<neo4j_user_name>",
+      "authentication.basic.password" : "<neo4j_password>",
+      "query" : "<The neo4j cypher query>\nIn case of writing into Neo4j please see https://neo4j.com/docs/spark/current/writing/#write-query\nIn case of reading from Neo4j please see https://neo4j.com/docs/spark/current/reading/#read-query\n",
+      "relationship" : "<The relationship type>\nN.b. this field requires extra configuration please see\n - In case of writing: https://neo4j.com/docs/spark/current/writing/#write-rel\n - In case of reading: https://neo4j.com/docs/spark/current/reading/#read-rel\n",
+      "labels" : "<List of node labels separated by `:` The first label will be the primary label>.\nIn case of writing into Neo4j please see https://neo4j.com/docs/spark/current/writing/#write-node\nIn case of reading from Neo4j please see https://neo4j.com/docs/spark/current/reading/#read-node\n"
+    },
+    "mode" : "<Spark Save Mode>\nN.b. It'll be ignored if you're reading data from Neo4j.\nPlease check supported save modes here: https://neo4j.com/docs/spark/current/writing/#save-mode\n"
+  }
+}
