@@ -2,11 +2,6 @@
 
 This repository contains the Neo4j Data Warehouse Connector for Apache Spark.
 
-# License
-
-This neo4j-connector-apache-spark is Apache 2 Licensed
-
-
 # Goal
 
 The goal of the Neo4j DWH Connector is to simplify the interoperability between Neo4j Spark and other data sources like Snowflake, Redshift and so on.
