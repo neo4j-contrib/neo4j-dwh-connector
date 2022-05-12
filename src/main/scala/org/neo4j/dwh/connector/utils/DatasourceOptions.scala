@@ -48,7 +48,7 @@ object DatasourceOptions extends Enumeration {
     "partition" -> partition
   ), Array("net.snowflake:spark-snowflake_<scala_version>:<version>", "net.snowflake:snowflake-jdbc:<version>"))
   val Neo4j = DatasourceOptionsValue(Map(
-    "format" -> "org.neo4j.spark.Datasource",
+    "format" -> "org.neo4j.spark.DataSource",
     "columns" -> cols,
     "where" -> ">Spark SQL filter to the Dataframe> It will be ignored in case you're using it in the `target` field.",
     "mode" ->
