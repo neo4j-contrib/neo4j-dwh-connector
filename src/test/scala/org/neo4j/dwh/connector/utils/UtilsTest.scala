@@ -26,14 +26,15 @@ class UtilsTest {
 
   @Test
   def shouldReturnMapWithEnvAndFileContent(): Unit = {
-    Assume.assumeTrue(StringUtils.isNotBlank(Properties.envOrElse("MY_ENV", "")))
+    val myenv = Properties.envOrElse("MY_ENV", "")
+    Assume.assumeTrue(StringUtils.isNotBlank(myenv))
     val sourceMap = Map("foo" -> "bar",
       "withEnv" -> "${env:MY_ENV}",
       "noEnv" -> "${env:NO_ENV}",
       "withFile" -> s"$${$queryUrl}",
       "noFile" -> "${file:/foo/bar.cyp}")
     val expected = Map("foo" -> "bar",
-      "withEnv" -> "MY_ENV_value",
+      "withEnv" -> myenv,
       "noEnv" -> "${env:NO_ENV}",
       "withFile" -> queryFile,
       "noFile" -> "${file:/foo/bar.cyp}")

@@ -15,7 +15,10 @@ import scala.collection.JavaConverters._
 import scala.util.Properties
 
 object Neo4jDWHConnectorIT {
-  val neo4jContainer = new Neo4jContainer(DockerImageName.parse("neo4j:4.4"))
+  private val properties = new java.util.Properties()
+  properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("neo4j-dwh-connector.properties"))
+
+  val neo4jContainer = new Neo4jContainer(DockerImageName.parse(s"neo4j:${properties.getProperty("neo4j.version")}"))
     .withNeo4jConfig("dbms.security.auth_enabled", "false")
     .asInstanceOf[Neo4jContainer[_]]
 

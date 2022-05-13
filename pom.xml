@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.neo4j</groupId>
   <artifactId>neo4j-dwh-connector</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>${project.artifactId}</name>
   <description>This is the Neo4j DWH Connector supposed to work in combination with Apache Spark</description>
   <inceptionYear>2022</inceptionYear>
@@ -18,25 +18,33 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <encoding>UTF-8</encoding>
-    <scala.version>2.12.12</scala.version>
-    <scala.binary.version>2.12</scala.binary.version>
     <spec2.version>4.2.0</spec2.version>
     <jackson-databind.version>2.13.1</jackson-databind.version>
-    <spark.version>3.2.0</spark.version>
     <junit.version>4.13.2</junit.version>
     <xbean.version>4.10</xbean.version>
     <common-cli.version>1.5.0</common-cli.version>
-    <neo4j.spark.version>4.1.1_for_spark_3</neo4j.spark.version>
+
     <powermock.version>2.0.9</powermock.version>
     <testcontainers.version>1.15.3</testcontainers.version>
     <bigquery.spark.version>0.23.2</bigquery.spark.version>
     <snowflake.spark.version>2.10.0-spark_3.2</snowflake.spark.version>
     <snowflake.jdbc.version>3.13.15</snowflake.jdbc.version>
     <redshift.spark.version>5.0.4</redshift.spark.version>
-    <avro.spark.version>3.2.0</avro.spark.version>
     <redshift.jdbc.version>2.1.0.5</redshift.jdbc.version>
     <aws-java-sdk.version>1.12.178</aws-java-sdk.version>
     <hadoop-aws.version>3.3.1</hadoop-aws.version>
+    <spark-mssql-connector_version>1.1.0</spark-mssql-connector_version>
+    <spark-mssql-connector-artifactId>spark-mssql-connector_${scala.binary.version}</spark-mssql-connector-artifactId>
+    <!--    <scala.version>2.12.12</scala.version>-->
+    <!--    <spark.version>3.2.1</spark.version>-->
+    <!--    <scala.binary.version>2.12</scala.binary.version>-->
+    <!-- This is empty because we use it for the deploy process -->
+    <scala.binary.version />
+    <spark-bigquery-with-dependencies-artifactId>
+      spark-bigquery-with-dependencies_${scala.binary.version}
+    </spark-bigquery-with-dependencies-artifactId>
+    <neo4j-connector-apache-spark-artifactId>neo4j-connector-apache-spark_${scala.binary.version}
+    </neo4j-connector-apache-spark-artifactId>
   </properties>
 
 
@@ -110,8 +118,8 @@
 
     <dependency>
       <groupId>com.microsoft.azure</groupId>
-      <artifactId>spark-mssql-connector_${scala.binary.version}</artifactId>
-      <version>1.1.0</version>
+      <artifactId>${spark-mssql-connector-artifactId}</artifactId>
+      <version>${spark-mssql-connector_version}</version>
       <scope>test</scope>
     </dependency>
 
@@ -131,7 +139,7 @@
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-avro_${scala.binary.version}</artifactId>
-      <version>${avro.spark.version}</version>
+      <version>${spark.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -153,17 +161,16 @@
       <scope>test</scope>
     </dependency>
 
-
     <dependency>
       <groupId>org.neo4j</groupId>
-      <artifactId>neo4j-connector-apache-spark_${scala.binary.version}</artifactId>
+      <artifactId>${neo4j-connector-apache-spark-artifactId}</artifactId>
       <version>${neo4j.spark.version}</version>
       <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>com.google.cloud.spark</groupId>
-      <artifactId>spark-bigquery-with-dependencies_${scala.binary.version}</artifactId>
+      <artifactId>${spark-bigquery-with-dependencies-artifactId}</artifactId>
       <version>${bigquery.spark.version}</version>
       <scope>test</scope>
     </dependency>
@@ -197,9 +204,127 @@
     </dependency>
   </dependencies>
 
+  <profiles>
+    <!-- scala profiles -->
+    <profile>
+      <id>scala-2.12</id>
+      <properties>
+        <scala.version>2.12.13</scala.version>
+        <scala.binary.version>2.12</scala.binary.version>
+
+      </properties>
+    </profile>
+    <profile>
+      <id>scala-2.13</id>
+      <properties>
+        <scala.version>2.13.4</scala.version>
+        <scala.binary.version>2.13</scala.binary.version>
+        <!--
+          N.B. the following packages are not available yet for Scala 2.13,
+          we use Scala 2.12 only for allowing the compilation
+        -->
+        <spark-mssql-connector-artifactId>spark-mssql-connector_2.12</spark-mssql-connector-artifactId>
+        <spark-bigquery-with-dependencies-artifactId>
+          spark-bigquery-with-dependencies_2.12
+        </spark-bigquery-with-dependencies-artifactId>
+        <neo4j-connector-apache-spark-artifactId>
+          neo4j-connector-apache-spark_2.12
+        </neo4j-connector-apache-spark-artifactId>
+      </properties>
+    </profile>
+    <profile>
+      <id>scala-2.11</id>
+      <properties>
+        <scala.version>2.11.12</scala.version>
+        <scala.binary.version>2.11</scala.binary.version>
+      </properties>
+    </profile>
+    <!-- end scala profiles -->
+    <!-- spark profiles -->
+    <profile>
+      <id>spark-3</id>
+      <properties>
+        <spark.version>3.2.1</spark.version>
+        <neo4j.spark.version>4.1.2_for_spark_3</neo4j.spark.version>
+      </properties>
+    </profile>
+    <profile>
+      <id>spark-2.4</id>
+      <properties>
+        <spark.version>2.4.8</spark.version>
+        <neo4j.spark.version>4.1.2_for_spark_2.4</neo4j.spark.version>
+        <spark-mssql-connector_version>1.0.2</spark-mssql-connector_version>
+        <snowflake.spark.version>2.9.3-spark_2.4</snowflake.spark.version>
+        <spark-mssql-connector-artifactId>spark-mssql-connector</spark-mssql-connector-artifactId>
+      </properties>
+    </profile>
+    <!-- end spark profiles -->
+    <!-- neo4j profiles -->
+    <profile>
+      <id>neo4j-4.0</id>
+      <properties>
+        <neo4j.version>4.0.11</neo4j.version>
+        <neo4j.experimental>false</neo4j.experimental>
+      </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+    <profile>
+      <id>neo4j-3.5</id>
+      <properties>
+        <neo4j.version>3.5.22</neo4j.version>
+        <neo4j.experimental>false</neo4j.experimental>
+      </properties>
+    </profile>
+    <profile>
+      <id>neo4j-4.1</id>
+      <properties>
+        <neo4j.version>4.1.6</neo4j.version>
+        <neo4j.experimental>false</neo4j.experimental>
+      </properties>
+    </profile>
+    <profile>
+      <id>neo4j-4.2</id>
+      <properties>
+        <neo4j.version>4.2.3</neo4j.version>
+        <neo4j.experimental>false</neo4j.experimental>
+      </properties>
+    </profile>
+    <profile>
+      <id>neo4j-4.3</id>
+      <properties>
+        <neo4j.version>4.3.0</neo4j.version>
+        <neo4j.experimental>false</neo4j.experimental>
+      </properties>
+    </profile>
+    <profile>
+      <id>neo4j-4.4</id>
+      <properties>
+        <neo4j.version>4.4.4</neo4j.version>
+        <neo4j.experimental>false</neo4j.experimental>
+      </properties>
+    </profile>
+    <!-- end neo4j profiles -->
+  </profiles>
+
   <build>
     <sourceDirectory>src/main/scala</sourceDirectory>
     <testSourceDirectory>src/test/scala</testSourceDirectory>
+    <resources>
+      <resource>
+        <directory>python</directory>
+        <excludes>
+          <exclude>**/test/**</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+        <filtering>true</filtering>
+      </testResource>
+    </testResources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -214,6 +339,8 @@
               <mainClass>org.neo4j.dwh.connector.Neo4jDWHConnector</mainClass>
             </manifest>
           </archive>
+          <finalName>${project.artifactId}-${project.version}</finalName>
+          <appendAssemblyId>false</appendAssemblyId>
         </configuration>
         <executions>
           <execution>
@@ -233,13 +360,16 @@
             <goals>
               <goal>compile</goal>
               <goal>testCompile</goal>
+              <goal>doc-jar</goal>
             </goals>
             <configuration>
               <args>
                 <arg>-dependencyfile</arg>
                 <arg>${project.build.directory}/.scala_dependencies</arg>
+<!--                <arg>-Ypartial-unification</arg>-->
               </args>
             </configuration>
+            <phase>process-resources</phase>
           </execution>
         </executions>
       </plugin>

@@ -29,7 +29,7 @@
     }
   },
   "target" : {
-    "format" : "org.neo4j.spark.Datasource",
+    "format" : "org.neo4j.spark.DataSource",
     "options" : {
       "_comment" : "<This field is a comment you can simple ignore it>\nYou can find the full list of Neo4j configuration properties here:\nhttps://neo4j.com/docs/spark/current/\n",
       "url" : "<neo4j_url>",

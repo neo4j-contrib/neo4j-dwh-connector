@@ -33,3 +33,5 @@ doc/node
 doc/node_modules
 doc/package-lock.json
 scripts/python/local
+python/neo4j_dwh_connector/__pycache__/
+python/neo4j_dwh_connector/.pytest_cache/
