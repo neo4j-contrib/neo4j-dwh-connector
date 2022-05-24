@@ -7,6 +7,33 @@
   <description>This is the Neo4j DWH Connector supposed to work in combination with Apache Spark</description>
   <inceptionYear>2022</inceptionYear>
 
+  <organization>
+    <name>Neo4j, Inc.</name>
+    <url>http://neo4j.com/</url>
+  </organization>
+  <developers>
+    <developer>
+      <id>conker84</id>
+      <name>Andrea Santurbano</name>
+    </developer>
+  </developers>
+
+  <url>https://github.com/neo4j-contrib/neo4j-dwh-connector</url>
+  <scm>
+    <url>https://github.com/neo4j-contrib/neo4j-dwh-connector</url>
+  </scm>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <comments>
+        Note that this license is for the project itself,
+        and not for its dependencies.
+      </comments>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
   <repositories>
     <repository>
       <id>jitpack.io</id>
@@ -358,6 +385,7 @@
         <executions>
           <execution>
             <goals>
+              <goal>add-source</goal>
               <goal>compile</goal>
               <goal>testCompile</goal>
               <goal>doc-jar</goal>
@@ -370,6 +398,19 @@
               </args>
             </configuration>
             <phase>process-resources</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
