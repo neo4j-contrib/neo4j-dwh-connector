@@ -15,7 +15,7 @@ The examples that we’re providing here are for a Job that moves data from Snow
 
 # How does it work?
 
-The Neo4j DWH Connector provides an easy way in order move data between Neo4j and popular Data Warehouses like
+The Neo4j DWH Connector provides an easy way in order move data between Neo4j and popular Data Warehouses like:
 
 
 
@@ -29,7 +29,7 @@ You can you use it in two ways:
 
 
 * As Spark Submit Job by providing a JSON configuration that abstracts a Spark Job which moves data from one data source to another
-* As Scala API in order to simplify writing a Spark Job that moves the dat from a database to another
+* As Scala/Python API in order to simplify writing a Spark Job that moves the dat from a database to another
 
 
 # How does the JSON configuration look like?
