@@ -86,7 +86,7 @@ class Neo4jDWHConnector(session: SparkSession, job: JobConfig) {
     }
 
     if (source.partition.number > 0) {
-      dataFrame = if (StringUtils.isNotBlank(source.partition.by)) {
+      dataFrame = if (StringUtils.isBlank(source.partition.by)) {
         dataFrame.repartition(source.partition.number)
       } else {
         dataFrame.repartition(source.partition.number, new sql.Column(source.partition.by))
