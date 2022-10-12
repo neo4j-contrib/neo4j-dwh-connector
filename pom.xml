@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.neo4j</groupId>
   <artifactId>neo4j-dwh-connector</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <name>${project.artifactId}</name>
   <description>This is the Neo4j DWH Connector supposed to work in combination with Apache Spark</description>
   <inceptionYear>2022</inceptionYear>
