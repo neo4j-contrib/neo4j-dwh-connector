@@ -614,10 +614,7 @@ For scala 2.12 and Spark 3 `./maven-release.sh package 2.12 3`
 
 For scala 2.13 and Spark 3 `./maven-release.sh package 2.13 3`
 
-#Blog Guidance
-Here comes the details for Make easier than ever to move data between your data warehouse and Neo4j!
 
-https://neo4j.com/developer-blog/introducing-neo4j-data-warehouse-connector/
 
 # Quickstart
 
