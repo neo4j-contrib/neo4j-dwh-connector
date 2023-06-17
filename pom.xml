@@ -46,7 +46,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <encoding>UTF-8</encoding>
     <spec2.version>4.2.0</spec2.version>
-    <jackson-databind.version>2.13.1</jackson-databind.version>
+    <jackson-databind.version>2.15.1</jackson-databind.version>
     <junit.version>4.13.2</junit.version>
     <xbean.version>4.10</xbean.version>
     <common-cli.version>1.5.0</common-cli.version>
@@ -66,7 +66,7 @@
     <!--    <spark.version>3.2.1</spark.version>-->
     <!--    <scala.binary.version>2.12</scala.binary.version>-->
     <!-- This is empty because we use it for the deploy process -->
-    <scala.binary.version />
+    <scala.binary.version/>
     <spark-bigquery-with-dependencies-artifactId>
       spark-bigquery-with-dependencies_${scala.binary.version}
     </spark-bigquery-with-dependencies-artifactId>
