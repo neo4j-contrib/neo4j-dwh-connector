@@ -110,7 +110,7 @@ This Job moves data from a Snowflake instance, and in particular from **SNOWFLAK
      { "name": "O_COMMENT" },
      { "name": "CAST(O_ORDERKEY AS LONG)", "alias": "O_ORDERKEY" }
    ],
-   "where" : "C_CUSTKEY <= 10",
+   "where" : "O_CUSTKEY <= 10",
    "printSchema" : false,
    "partition" : {}
  },
@@ -165,7 +165,7 @@ Output:
      { "name": "O_COMMENT" },
      { "name": "CAST(O_ORDERKEY AS LONG)", "alias": "O_ORDERKEY" }
    ],
-   "where" : "C_CUSTKEY <= 10",
+   "where" : "O_CUSTKEY <= 10",
    "printSchema" : false,
    "partition" : {}
  },
