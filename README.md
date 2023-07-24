@@ -322,19 +322,19 @@ Consider this json:
 
 # Use the DWH Connector as Spark Submit Job
 
-The provided jar can be used in two ways:
+The jar can be used in two ways:
 
 
 
-1. In order to generate the configuration stub for the selected Source/Target databases
-2. Launch the Spark Job
+1. Generate the configuration stub for the selected Source/Target databases
+2. Used by Spark-submit to launch the Spark Job
 
-So when you want to move the data from a selected Source to a defined Target you need to perform the following steps:
-
+To move data from a selected Source to a defined Target you need to perform the following steps:
 
 
 1. Prepare the JSON file with all the required configurations with the Source and the Target database
-2. Launch the Spark Job
+2. Copy the JSON file(s) and neo4j-dwh-connector-<version>.jar to the server or Docker running Spark
+3. Run the Spark-submit command to start the Spark Job
 
 If you, want to get the full list of available options you can use the following command:
 
@@ -368,7 +368,7 @@ java -jar neo4j-dwh-connector-1.0.0.jar -c -s Snowflake -t Neo4j -p /tmp/dwh_job
 
 ## Launch the Spark Job
 
-Once you configured the JSON file properly, in order to get the job done, you only need to launch the Spark Job.
+Once you configured the JSON file properly, in order to get the job done, you only need to launch the Spark Job from a client .
 
 **_Nota bene_**
 
@@ -377,7 +377,7 @@ Each selected Source/Target will require external dependencies in oder work. So 
 
 ### Launch the Spark Job from CLI via Spark Submit
 
-In order to launch the Spark Job you need to place yourself into the Spark directory and run a command like this:
+In order to launch the Spark Job you need to be in the Spark directory and run the following command:
 
 
 ```bash
@@ -394,7 +394,7 @@ In order to launch the Spark Job you need to place yourself into the Spark direc
 ```
 
 
-Example launch the a Spark Job that moves data from Snowflake to Neo4j:
+Example command to launch a Spark Job that moves data from Snowflake to Neo4j:
 
 
 ```bash
@@ -410,7 +410,7 @@ Example launch the a Spark Job that moves data from Snowflake to Neo4j:
 
 ### Launch the Spark Job from Databricks Cloud
 
-Before creating the Spark Job you need to import the DWH connector jar and the JSON config [into DBFS](https://docs.databricks.com/data/data.html#:~:text=Import%20data,-If%20you%20have&text=There%20are%20two%20ways%20to,box%20on%20the%20landing%20page.)
+You may also run the Spark Job from Databricks Cloud, to do this requires that you import the DWH connector jar and the JSON config [into DBFS](https://docs.databricks.com/data/data.html#:~:text=Import%20data,-If%20you%20have&text=There%20are%20two%20ways%20to,box%20on%20the%20landing%20page.)
 
 In order to create a Spark Job into Databricks cloud you have to click into the **Jobs** menu section
 
