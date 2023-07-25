@@ -70,8 +70,7 @@
     <spark-bigquery-with-dependencies-artifactId>
       spark-bigquery-with-dependencies_${scala.binary.version}
     </spark-bigquery-with-dependencies-artifactId>
-    <neo4j-connector-apache-spark-artifactId>neo4j-connector-apache-spark_${scala.binary.version}
-    </neo4j-connector-apache-spark-artifactId>
+    <neo4j-connector-apache-spark-artifactId>neo4j-connector-apache-spark_${scala.binary.version}</neo4j-connector-apache-spark-artifactId>
   </properties>
 
 
@@ -235,10 +234,6 @@
     <!-- scala profiles -->
     <profile>
       <id>scala-2.12</id>
-      <activation>
-        <!-- 2.13 should really be the default but some libraries do not have releases for 2.13 yet -->
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <!-- 2.12.15 is the minimum, because of https://github.com/scala/bug/issues/12419) -->
         <!-- required fix is https://github.com/scala/scala/pull/9676 -->
@@ -248,6 +243,9 @@
     </profile>
     <profile>
       <id>scala-2.13</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <properties>
         <scala.version>2.13.11</scala.version>
         <scala.binary.version>2.13</scala.binary.version>
@@ -256,9 +254,6 @@
           we use Scala 2.12 only for allowing the compilation
         -->
         <spark-mssql-connector-artifactId>spark-mssql-connector_2.12</spark-mssql-connector-artifactId>
-        <neo4j-connector-apache-spark-artifactId>
-          neo4j-connector-apache-spark_2.12
-        </neo4j-connector-apache-spark-artifactId>
       </properties>
     </profile>
     <!-- end scala profiles -->
@@ -269,8 +264,8 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <spark.version>3.2.1</spark.version>
-        <neo4j.spark.version>4.1.2_for_spark_3</neo4j.spark.version>
+        <spark.version>3.3.2</spark.version>
+        <neo4j.spark.version>5.0.3_for_spark_3</neo4j.spark.version>
       </properties>
     </profile>
     <!-- end spark profiles -->
