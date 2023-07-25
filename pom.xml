@@ -53,7 +53,7 @@
 
     <powermock.version>2.0.9</powermock.version>
     <testcontainers.version>1.18.3</testcontainers.version>
-    <bigquery.spark.version>0.23.2</bigquery.spark.version>
+    <bigquery.spark.version>0.32.0</bigquery.spark.version>
     <snowflake.spark.version>2.10.0-spark_3.2</snowflake.spark.version>
     <snowflake.jdbc.version>3.13.15</snowflake.jdbc.version>
     <redshift.spark.version>5.0.4</redshift.spark.version>
@@ -256,9 +256,6 @@
           we use Scala 2.12 only for allowing the compilation
         -->
         <spark-mssql-connector-artifactId>spark-mssql-connector_2.12</spark-mssql-connector-artifactId>
-        <spark-bigquery-with-dependencies-artifactId>
-          spark-bigquery-with-dependencies_2.12
-        </spark-bigquery-with-dependencies-artifactId>
         <neo4j-connector-apache-spark-artifactId>
           neo4j-connector-apache-spark_2.12
         </neo4j-connector-apache-spark-artifactId>
