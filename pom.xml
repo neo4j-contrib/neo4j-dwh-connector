@@ -236,15 +236,14 @@
     <profile>
       <id>scala-2.12</id>
       <properties>
-        <scala.version>2.12.13</scala.version>
+        <scala.version>2.12.18</scala.version>
         <scala.binary.version>2.12</scala.binary.version>
-
       </properties>
     </profile>
     <profile>
       <id>scala-2.13</id>
       <properties>
-        <scala.version>2.13.4</scala.version>
+        <scala.version>2.13.11</scala.version>
         <scala.binary.version>2.13</scala.binary.version>
         <!--
           N.B. the following packages are not available yet for Scala 2.13,
@@ -259,77 +258,33 @@
         </neo4j-connector-apache-spark-artifactId>
       </properties>
     </profile>
-    <profile>
-      <id>scala-2.11</id>
-      <properties>
-        <scala.version>2.11.12</scala.version>
-        <scala.binary.version>2.11</scala.binary.version>
-      </properties>
-    </profile>
     <!-- end scala profiles -->
     <!-- spark profiles -->
     <profile>
       <id>spark-3</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <properties>
         <spark.version>3.2.1</spark.version>
         <neo4j.spark.version>4.1.2_for_spark_3</neo4j.spark.version>
       </properties>
     </profile>
-    <profile>
-      <id>spark-2.4</id>
-      <properties>
-        <spark.version>2.4.8</spark.version>
-        <neo4j.spark.version>4.1.2_for_spark_2.4</neo4j.spark.version>
-        <spark-mssql-connector_version>1.0.2</spark-mssql-connector_version>
-        <snowflake.spark.version>2.9.3-spark_2.4</snowflake.spark.version>
-        <spark-mssql-connector-artifactId>spark-mssql-connector</spark-mssql-connector-artifactId>
-      </properties>
-    </profile>
     <!-- end spark profiles -->
     <!-- neo4j profiles -->
     <profile>
-      <id>neo4j-4.0</id>
-      <properties>
-        <neo4j.version>4.0.11</neo4j.version>
-        <neo4j.experimental>false</neo4j.experimental>
-      </properties>
+      <id>neo4j-4.4</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-    </profile>
-    <profile>
-      <id>neo4j-3.5</id>
       <properties>
-        <neo4j.version>3.5.22</neo4j.version>
-        <neo4j.experimental>false</neo4j.experimental>
+        <neo4j.version>4.4</neo4j.version>
       </properties>
     </profile>
     <profile>
-      <id>neo4j-4.1</id>
+      <id>neo4j-5</id>
       <properties>
-        <neo4j.version>4.1.6</neo4j.version>
-        <neo4j.experimental>false</neo4j.experimental>
-      </properties>
-    </profile>
-    <profile>
-      <id>neo4j-4.2</id>
-      <properties>
-        <neo4j.version>4.2.3</neo4j.version>
-        <neo4j.experimental>false</neo4j.experimental>
-      </properties>
-    </profile>
-    <profile>
-      <id>neo4j-4.3</id>
-      <properties>
-        <neo4j.version>4.3.0</neo4j.version>
-        <neo4j.experimental>false</neo4j.experimental>
-      </properties>
-    </profile>
-    <profile>
-      <id>neo4j-4.4</id>
-      <properties>
-        <neo4j.version>4.4.4</neo4j.version>
-        <neo4j.experimental>false</neo4j.experimental>
+        <neo4j.version>5</neo4j.version>
       </properties>
     </profile>
     <!-- end neo4j profiles -->
