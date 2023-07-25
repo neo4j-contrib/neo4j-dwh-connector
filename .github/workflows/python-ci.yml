@@ -13,9 +13,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.6", "3.7", "3.8" ]
-        neo4j-version: [ "3.5", "4.0", "4.1", "4.2", "4.3", "4.4" ]
-        spark-version: [ {short: "3", ext: "3.0.1", scala: "2.12"}, {short: "3", ext: "3.1.1", scala: "2.12"}, {short: "3", ext: "3.2.0", scala: "2.12"} ]
+        python-version: [ "3.7", "3.8" ]
+        neo4j-version: [ "4.4", "5" ]
+        spark-version: [ {short: "3", ext: "3.3.2", scala: "2.12"} ]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -47,9 +47,8 @@ jobs:
         env:
           CI: true
         run: |
-          mvn clean package -Pspark-${{ matrix.spark-version.short }} -Pscala-${{ matrix.spark-version.scala }} -DskipTests --no-transfer-progress
+          mvn clean package -Pscala-${{ matrix.spark-version.scala }} -DskipTests --no-transfer-progress
       - name: Run tests for Spark ${{ matrix.spark-version.ext }} and Neo4j ${{ matrix.neo4j-version }}
-        if: ${{ !(matrix.spark-version.short == 2.4 && matrix.python-version == 3.8) && !(matrix.spark-version.ext == '3.2.0' && matrix.python-version == 3.5) }}
         run: |
           cd ./python
           export PYTHONPATH=$(pwd)

@@ -592,23 +592,16 @@ connector.run()
 
 We support:
 
-* Spark 2.4 with Scala 2.11 and 2.12
 * Spark 3.x with Scala 2.12 and 2.13
 
 # Maven resolution
 
-It depends on the Spark and Scala version:
-* For Spark 2.4 with Scala 2.11 and 2.12 the package resolution is `org.neo4j:neo4j-dwh-connector_<scala_version>:<dwh-connector-version>_for_spark_2.4`
-* For Spark 3.x with Scala 2.12 and 2.13 the package resolution is `org.neo4j:neo4j-dwh-connector_<scala_version>:<dwh-connector-version>_for_spark_3`
+For Spark 3.x with Scala 2.12 and 2.13 the package resolution is `org.neo4j:neo4j-dwh-connector_<scala_version>:<dwh-connector-version>_for_spark_3`
 
 
 # Build it locally
 
 In order to build it locally you can use the following commands
-
-For scala 2.11 and Spark 2.4 `./maven-release.sh package 2.11 2.4`
-
-For scala 2.12 and Spark 2.4 `./maven-release.sh package 2.12 2.4`
 
 For scala 2.12 and Spark 3 `./maven-release.sh package 2.12 3`
 
