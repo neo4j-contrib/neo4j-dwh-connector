@@ -52,8 +52,8 @@
     <common-cli.version>1.5.0</common-cli.version>
 
     <powermock.version>2.0.9</powermock.version>
-    <testcontainers.version>1.15.3</testcontainers.version>
-    <bigquery.spark.version>0.23.2</bigquery.spark.version>
+    <testcontainers.version>1.18.3</testcontainers.version>
+    <bigquery.spark.version>0.32.0</bigquery.spark.version>
     <snowflake.spark.version>2.10.0-spark_3.2</snowflake.spark.version>
     <snowflake.jdbc.version>3.13.15</snowflake.jdbc.version>
     <redshift.spark.version>5.0.4</redshift.spark.version>
@@ -70,8 +70,7 @@
     <spark-bigquery-with-dependencies-artifactId>
       spark-bigquery-with-dependencies_${scala.binary.version}
     </spark-bigquery-with-dependencies-artifactId>
-    <neo4j-connector-apache-spark-artifactId>neo4j-connector-apache-spark_${scala.binary.version}
-    </neo4j-connector-apache-spark-artifactId>
+    <neo4j-connector-apache-spark-artifactId>neo4j-connector-apache-spark_${scala.binary.version}</neo4j-connector-apache-spark-artifactId>
   </properties>
 
 
@@ -236,100 +235,54 @@
     <profile>
       <id>scala-2.12</id>
       <properties>
-        <scala.version>2.12.13</scala.version>
+        <!-- 2.12.15 is the minimum, because of https://github.com/scala/bug/issues/12419 -->
+        <!-- required fix is https://github.com/scala/scala/pull/9676 -->
+        <scala.version>2.12.18</scala.version>
         <scala.binary.version>2.12</scala.binary.version>
-
       </properties>
     </profile>
     <profile>
       <id>scala-2.13</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <properties>
-        <scala.version>2.13.4</scala.version>
+        <scala.version>2.13.11</scala.version>
         <scala.binary.version>2.13</scala.binary.version>
         <!--
           N.B. the following packages are not available yet for Scala 2.13,
           we use Scala 2.12 only for allowing the compilation
         -->
         <spark-mssql-connector-artifactId>spark-mssql-connector_2.12</spark-mssql-connector-artifactId>
-        <spark-bigquery-with-dependencies-artifactId>
-          spark-bigquery-with-dependencies_2.12
-        </spark-bigquery-with-dependencies-artifactId>
-        <neo4j-connector-apache-spark-artifactId>
-          neo4j-connector-apache-spark_2.12
-        </neo4j-connector-apache-spark-artifactId>
-      </properties>
-    </profile>
-    <profile>
-      <id>scala-2.11</id>
-      <properties>
-        <scala.version>2.11.12</scala.version>
-        <scala.binary.version>2.11</scala.binary.version>
       </properties>
     </profile>
     <!-- end scala profiles -->
     <!-- spark profiles -->
     <profile>
       <id>spark-3</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <properties>
-        <spark.version>3.2.1</spark.version>
-        <neo4j.spark.version>4.1.2_for_spark_3</neo4j.spark.version>
-      </properties>
-    </profile>
-    <profile>
-      <id>spark-2.4</id>
-      <properties>
-        <spark.version>2.4.8</spark.version>
-        <neo4j.spark.version>4.1.2_for_spark_2.4</neo4j.spark.version>
-        <spark-mssql-connector_version>1.0.2</spark-mssql-connector_version>
-        <snowflake.spark.version>2.9.3-spark_2.4</snowflake.spark.version>
-        <spark-mssql-connector-artifactId>spark-mssql-connector</spark-mssql-connector-artifactId>
+        <spark.version>3.3.2</spark.version>
+        <neo4j.spark.version>5.0.3_for_spark_3</neo4j.spark.version>
       </properties>
     </profile>
     <!-- end spark profiles -->
     <!-- neo4j profiles -->
     <profile>
-      <id>neo4j-4.0</id>
-      <properties>
-        <neo4j.version>4.0.11</neo4j.version>
-        <neo4j.experimental>false</neo4j.experimental>
-      </properties>
+      <id>neo4j-4.4</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-    </profile>
-    <profile>
-      <id>neo4j-3.5</id>
       <properties>
-        <neo4j.version>3.5.22</neo4j.version>
-        <neo4j.experimental>false</neo4j.experimental>
+        <neo4j.version>4.4</neo4j.version>
       </properties>
     </profile>
     <profile>
-      <id>neo4j-4.1</id>
+      <id>neo4j-5</id>
       <properties>
-        <neo4j.version>4.1.6</neo4j.version>
-        <neo4j.experimental>false</neo4j.experimental>
-      </properties>
-    </profile>
-    <profile>
-      <id>neo4j-4.2</id>
-      <properties>
-        <neo4j.version>4.2.3</neo4j.version>
-        <neo4j.experimental>false</neo4j.experimental>
-      </properties>
-    </profile>
-    <profile>
-      <id>neo4j-4.3</id>
-      <properties>
-        <neo4j.version>4.3.0</neo4j.version>
-        <neo4j.experimental>false</neo4j.experimental>
-      </properties>
-    </profile>
-    <profile>
-      <id>neo4j-4.4</id>
-      <properties>
-        <neo4j.version>4.4.4</neo4j.version>
-        <neo4j.experimental>false</neo4j.experimental>
+        <neo4j.version>5</neo4j.version>
       </properties>
     </profile>
     <!-- end neo4j profiles -->
@@ -426,6 +379,24 @@
             <include>**/*IT.*</include>
           </includes>
           <trimStackTrace>false</trimStackTrace>
+          <!-- copied from https://github.com/apache/spark/blob/3941369d13ad885eac21bd8ac1769aaf1a325c5a/launcher/src/main/java/org/apache/spark/launcher/JavaModuleOptions.java -->
+          <argLine>
+            -XX:+IgnoreUnrecognizedVMOptions
+            --add-opens=java.base/java.lang=ALL-UNNAMED
+            --add-opens=java.base/java.lang.invoke=ALL-UNNAMED
+            --add-opens=java.base/java.lang.reflect=ALL-UNNAMED
+            --add-opens=java.base/java.io=ALL-UNNAMED
+            --add-opens=java.base/java.net=ALL-UNNAMED
+            --add-opens=java.base/java.nio=ALL-UNNAMED
+            --add-opens=java.base/java.util=ALL-UNNAMED
+            --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+            --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED
+            --add-opens=java.base/sun.nio.ch=ALL-UNNAMED
+            --add-opens=java.base/sun.nio.cs=ALL-UNNAMED
+            --add-opens=java.base/sun.security.action=ALL-UNNAMED
+            --add-opens=java.base/sun.util.calendar=ALL-UNNAMED
+            --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED
+          </argLine>
         </configuration>
       </plugin>
     </plugins>
