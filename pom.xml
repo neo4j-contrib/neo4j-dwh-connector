@@ -49,7 +49,7 @@
     <jackson-databind.version>2.17.1</jackson-databind.version>
     <junit.version>4.13.2</junit.version>
     <xbean.version>4.10</xbean.version>
-    <common-cli.version>1.7.0</common-cli.version>
+    <common-cli.version>1.8.0</common-cli.version>
 
     <powermock.version>2.0.9</powermock.version>
     <testcontainers.version>1.18.3</testcontainers.version>
