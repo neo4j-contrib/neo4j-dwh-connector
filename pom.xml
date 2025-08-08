@@ -71,6 +71,7 @@
       spark-bigquery-with-dependencies_${scala.binary.version}
     </spark-bigquery-with-dependencies-artifactId>
     <neo4j-connector-apache-spark-artifactId>neo4j-connector-apache-spark_${scala.binary.version}</neo4j-connector-apache-spark-artifactId>
+    <netty-bom.version>4.1.123.Final</netty-bom.version>
   </properties>
 
 
@@ -229,6 +230,18 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-bom</artifactId>
+        <version>${netty-bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <profiles>
     <!-- scala profiles -->
