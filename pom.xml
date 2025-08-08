@@ -237,7 +237,7 @@
       <properties>
         <!-- 2.12.15 is the minimum, because of https://github.com/scala/bug/issues/12419 -->
         <!-- required fix is https://github.com/scala/scala/pull/9676 -->
-        <scala.version>2.12.18</scala.version>
+        <scala.version>2.12.20</scala.version>
         <scala.binary.version>2.12</scala.binary.version>
       </properties>
     </profile>
@@ -247,7 +247,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <scala.version>2.13.12</scala.version>
+        <scala.version>2.13.16</scala.version>
         <scala.binary.version>2.13</scala.binary.version>
         <!--
           N.B. the following packages are not available yet for Scala 2.13,
@@ -264,17 +264,14 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <spark.version>3.3.2</spark.version>
-        <neo4j.spark.version>5.0.3_for_spark_3</neo4j.spark.version>
+        <spark.version>3.5.6</spark.version>
+        <neo4j.spark.version>5.3.8_for_spark_3</neo4j.spark.version>
       </properties>
     </profile>
     <!-- end spark profiles -->
     <!-- neo4j profiles -->
     <profile>
       <id>neo4j-4.4</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <neo4j.version>4.4</neo4j.version>
       </properties>
@@ -283,6 +280,15 @@
       <id>neo4j-5</id>
       <properties>
         <neo4j.version>5</neo4j.version>
+      </properties>
+    </profile>
+    <profile>
+      <id>neo4j-2025</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <neo4j.version>2025</neo4j.version>
       </properties>
     </profile>
     <!-- end neo4j profiles -->
