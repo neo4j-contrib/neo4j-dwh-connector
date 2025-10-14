@@ -277,7 +277,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <spark.version>3.5.6</spark.version>
+        <spark.version>3.5.7</spark.version>
         <neo4j.spark.version>5.3.8_for_spark_3</neo4j.spark.version>
       </properties>
     </profile>
